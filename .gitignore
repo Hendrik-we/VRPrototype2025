@@ -1,0 +1,24 @@
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild*/
+Logs/
+UserSettings/
+MemoryCaptures/
+sysinfo.txt
+
+# Visual Studio files
+.vs/
+*.csproj
+*.sln
+*.user
+*.userprefs
+
+# Unity cache
+*.pidb
+*.booproj
+
+# Gradle (Android)
+.gradle/
+*.apk
+*.aab

@@ -9,7 +9,7 @@ public class ChapterManager : MonoBehaviour
 
     void Start()
     {
-        taskManager2.StartChapter();
+        taskManager1.StartChapter();
     }
 
     public void CheckChapter1()
@@ -29,7 +29,7 @@ public class ChapterManager : MonoBehaviour
 
     private void StartChapter3()
     {
-        taskManager2.StartChapter();
+        taskManager3.StartChapter();
     }
 
     public void CheckChapter3()

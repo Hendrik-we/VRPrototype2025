@@ -18,7 +18,7 @@ public class TaskManager3 : MonoBehaviour
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
         {1, "Aufgabe 1: Spüle das Glas der Pufferlösung A, Lösung B und den Erlenmeyerkolben aus!"},
-        {2, "Aufgabe 2: Stell alle Behälter bis auf die Reaktionslösung zurück in das Regal!"},
+        {2, "Aufgabe 2: Stell alle leeren Behälter zurück in das Regal!"},
         {3, "Aufgabe 3: Leg Schutzbrille und Handschuhe ab!" },
         {4, "Aufgabe 4: Schalte die Arbeitsflächenbeleuchtung aus!" },
         {5, "Kapitel 3 abgeschlossen!" }

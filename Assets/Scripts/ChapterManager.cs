@@ -3,15 +3,35 @@ using UnityEngine;
 public class ChapterManager : MonoBehaviour
 {
 
+    public SettingsManager settingsManager;
+    public TutorialManager tutorialManager;
     public TaskManager taskManager1;
     public TaskManager2 taskManager2;
     public TaskManager3 taskManager3;
 
     void Start()
     {
-        taskManager1.StartChapter();
+        settingsManager.StartChapter();
     }
 
+    public void CheckSettings()
+    {
+        StartSettings();
+    }
+    private void StartSettings()
+    {
+        tutorialManager.StartChapter();
+    }
+
+    public void CheckTutorial()
+    {
+        StartChapter1();
+    }
+
+    private void StartChapter1()
+    {
+        taskManager1.StartChapter();
+    }
     public void CheckChapter1()
     {
         StartChapter2();

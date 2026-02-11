@@ -18,14 +18,13 @@ public class TaskManager3 : MonoBehaviour
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
         {1, "Aufgabe 1: Spüle das Glas der Pufferlösung A, Lösung B und den Erlenmeyerkolben aus!"},
-        {2, "Aufgabe 2: Stell alle ausgespülten Behälter zurück in das Regal!"},
+        {2, "Aufgabe 2: Stell alle leeren Behälter zurück in das Regal!"},
         {3, "Aufgabe 3: Leg Schutzbrille und Handschuhe ab!" },
         {4, "Aufgabe 4: Schalte die Arbeitsflächenbeleuchtung aus!" },
         {5, "Kapitel 3 abgeschlossen!" }
     };
 
-
-    public void StartChapter3()
+    public void StartChapter()
     {
         activeChapter = true;
         taskText.text = "Laborschulung - Kapitel 3: Nachbereitung und Entsorgung";
@@ -60,5 +59,30 @@ public class TaskManager3 : MonoBehaviour
     }
 
     //Task1
+    public void SetGlassesClean()
+    {
+        CheckTask(1);
+    }
+
+    //Task2
+    public void SetGlassesPlaced()
+    {
+        CheckTask(2);
+    }
+
+    //Task3
+    public void SetClothesOff()
+    {
+        CheckTask(3);
+    }
+
+    //Task4
+    public void SetLightsOff()
+    {
+        CheckTask(4);
+    }
+
 
 }
+
+

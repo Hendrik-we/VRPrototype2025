@@ -9,6 +9,9 @@ public class WardrobeManager : MonoBehaviour
     public bool hasGloves;
     public bool hasGlasses;
     public TaskManager taskManager;
+    public TaskManager3 taskManager3;
+    public WashManager washManager;
+    public bool allowLightTask = false;
 
     public void ToggleHelmet()
     {
@@ -40,7 +43,17 @@ public class WardrobeManager : MonoBehaviour
         if (hasGlasses) statusText.text += "- Brille\n";
 
         if (!hasHelmet && !hasGloves && !hasGlasses)
+        {
             statusText.text += "- Nichts";
+            if(washManager.allownextTask)
+            {
+                taskManager3.SetClothesOff();
+                washManager.ResetTask();
+                allowLightTask = true;
+            }
+
+        }
+            
     }
 
 

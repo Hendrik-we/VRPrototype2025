@@ -11,7 +11,7 @@ public class ChapterManager : MonoBehaviour
 
     void Start()
     {
-        settingsManager.StartChapter();
+        taskManager1.StartChapter();
     }
 
     public void CheckSettings()

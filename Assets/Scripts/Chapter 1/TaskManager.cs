@@ -52,7 +52,7 @@ public class TaskManager : MonoBehaviour
 
     private void CheckTask(int value)
     {
-        if (activeChapter || activeTask == value)
+        if (activeChapter && activeTask == value)
         {
 
             nCompletedTasks = nCompletedTasks + 1;

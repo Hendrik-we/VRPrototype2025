@@ -7,6 +7,7 @@ public class TutWadrobe : MonoBehaviour
     public TextMeshProUGUI statusText;
     public bool hasGloves;
     public TutorialManager tutorialManager;
+    public bool allowGlovesOff = false;
 
     public void ToggleGloves()
     {
@@ -21,4 +22,12 @@ public class TutWadrobe : MonoBehaviour
         if (hasGloves) statusText.text += "- Handschuhe\n";
         if (!hasGloves) statusText.text += "- Nichts";
     }
+
+    public void AllowGlovesOff()
+    {
+        allowGlovesOff = true;
+    }
+
+
+
 }

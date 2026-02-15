@@ -30,6 +30,7 @@ public class TaskManager : MonoBehaviour
 
     public void StartChapter()
     {
+
         activeChapter = true;
         taskText.text = "Laborschulung - Kapitel 1: Vorbereitung des Arbeitsplatzes";
         StartCoroutine(StartTask(1));

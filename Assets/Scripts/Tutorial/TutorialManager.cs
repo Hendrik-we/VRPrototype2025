@@ -22,7 +22,8 @@ public class TutorialManager : MonoBehaviour
             {3, "Aufgabe 3: Entleere den Florenzkolben in den Erlenmeyerkolben!"},
             {4, "Aufgabe 4: Platziere die fertige Mischung im Analysegerät!"},
             {5, "Aufgabe 5: Zieh die Sicherheitshandschuhe aus!" },
-            {6, "Tutorial abgeschlossen!"}
+            {6, "Schau dich im Labor um und lerne die verschiedenen Geräte kennen! Wenn du damit fertig bist, starte das Szenario mit dem großen grünen Knopf an der Wand!"},
+            {7, "Tutorial abgeschlossen!"}
         };
 
         // selbst erlernen: ifelse, for, while, if, public/private, checktask, starttask, startchapter, publicmethods, 
@@ -84,6 +85,11 @@ public class TutorialManager : MonoBehaviour
     public void SetGlovesOff()
     {
         CheckTask(5);
+    }
+
+    public void FinishTutorial()
+    {
+        CheckTask(6);
     }
 
 

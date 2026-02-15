@@ -7,6 +7,7 @@ public class TutAnalysisZone : MonoBehaviour
     public GameObject erlenmeyer;
     public TextMeshProUGUI erlenmeyerText;
     public TutorialManager tutorialManager;
+    public TutWadrobe tutWadrobe;
 
     private bool erlenmeyerInside = false;
     private float analysisProgress = 0f;
@@ -49,7 +50,10 @@ public class TutAnalysisZone : MonoBehaviour
             erlenmeyerText.text = "Erlenmeyerkolben - Analyse abgeschlossen";
 
             tutorialManager.ErlenmeyerAnalyzed();
+            tutWadrobe.AllowGlovesOff();
         }
+
+
     }
 }
 

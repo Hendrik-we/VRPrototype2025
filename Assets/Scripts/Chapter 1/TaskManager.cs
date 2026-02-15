@@ -10,6 +10,8 @@ public class TaskManager : MonoBehaviour
     public TextMeshProUGUI taskText;
     public Slider progressBar;
     public ChapterManager chapterManager;
+    public TeleportManager teleportManager;
+    public Transform startPoint;
 
     private int nCompletedTasks = 0;
     private int activeTask = 0;
@@ -30,7 +32,7 @@ public class TaskManager : MonoBehaviour
 
     public void StartChapter()
     {
-
+        teleportManager.TeleportTo(startPoint);
         activeChapter = true;
         taskText.text = "Laborschulung - Kapitel 1: Vorbereitung des Arbeitsplatzes";
         StartCoroutine(StartTask(1));

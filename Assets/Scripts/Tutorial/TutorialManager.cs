@@ -26,9 +26,7 @@ public class TutorialManager : MonoBehaviour
             {7, "Tutorial abgeschlossen!"}
         };
 
-        // selbst erlernen: ifelse, for, while, if, public/private, checktask, starttask, startchapter, publicmethods, 
-        // privatemethods
-        // Raum funktionieren zu machen: Befehle ausführen, siehe Whatsapp  
+ 
     public void StartChapter()
     {
 

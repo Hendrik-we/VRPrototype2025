@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 
 
@@ -11,8 +12,12 @@ public class TutorialManager : MonoBehaviour
 {
     public TextMeshProUGUI taskText;
     public ChapterManager chapterManager;
+    public TeleportManager teleportManager;
+    public Transform startPoint;
+    public Slider progressBar;
 
     private int activeTask = 0;
+    private int completedTasks = 0;
     private bool chapterActive = false;
     
     Dictionary<int, string> tasks = new Dictionary<int, string>()
@@ -29,11 +34,11 @@ public class TutorialManager : MonoBehaviour
  
     public void StartChapter()
     {
-
+        teleportManager.TeleportTo(startPoint);
         chapterActive = true; 
         taskText.text = "Laborschulung - Tutorial: Einführung in die Laborausrüstung";
         StartCoroutine(StartTask(1));
-        
+        progressBar.value = 0;
     }
 
     private IEnumerator StartTask(int value)
@@ -54,7 +59,8 @@ public class TutorialManager : MonoBehaviour
     {
         if (chapterActive && activeTask == value)
         {
-            
+            completedTasks = completedTasks + 1;
+            progressBar.value = (float)completedTasks / tasks.Count;
             taskText.text = $"Aufgabe {value} erledigt!";
             StartCoroutine(StartTask(value + 1));
         }

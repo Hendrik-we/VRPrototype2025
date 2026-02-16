@@ -8,6 +8,15 @@ public class SettingsManager : MonoBehaviour
 {
     public TextMeshProUGUI taskText;
     public ChapterManager chapterManager;
+    public SettingCategory settingPresentation;
+    public SettingCategory settingProgressbar;
+    public SettingCategory settingTimer;
+    public SettingCategory settingClue;
+
+    public string labelPresentation;
+    public string labelProgressbar;
+    public string labelClue;
+    public string labelTimer;
 
 
     private int nCompletedTasks = 0;
@@ -16,7 +25,7 @@ public class SettingsManager : MonoBehaviour
 
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
-        {1, "Nimm die nötigen Einstellungen vor, mit denen du den Durchlauf bestreiten willst und bestätige diese auf dem Knopf."},
+        {1, "Nimm die nötigen Einstellungen vor, mit denen du den Durchlauf bestreiten willst. Bestätige die Einstellungen und starte das Tutorial mit einem Klick auf die Tür."},
         {2, "Einstellungen bestätigt!"}
     };
 
@@ -54,12 +63,19 @@ public class SettingsManager : MonoBehaviour
         }
     }
 
-    //Task1
-    public void SetSettingsDone(bool value)
+    public void ApplySettings()
     {
-        if (value)
-        {
-            CheckTask(1);
-        }
+        labelPresentation = settingPresentation.GetCurrentOption();
+        labelProgressbar = settingProgressbar.GetCurrentOption();
+        labelClue = settingClue.GetCurrentOption();
+        labelTimer = settingTimer.GetCurrentOption();
     }
+
+    //Task1
+    public void SetSettingsDone()
+    {
+        CheckTask(1);
+    }
+
+
 }

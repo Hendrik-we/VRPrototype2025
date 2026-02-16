@@ -13,7 +13,7 @@ public class TaskManager : MonoBehaviour
     public TeleportManager teleportManager;
     public Transform startPoint;
 
-    private int nCompletedTasks = 0;
+    private int completedTasks = 0;
     private int activeTask = 0;
     private bool activeChapter = false;
 
@@ -58,8 +58,8 @@ public class TaskManager : MonoBehaviour
         if (activeChapter && activeTask == value)
         {
 
-            nCompletedTasks = nCompletedTasks + 1;
-            progressBar.value = (float)nCompletedTasks / tasks.Count;
+            completedTasks = completedTasks + 1;
+            progressBar.value = (float)completedTasks / tasks.Count;
             taskText.text = $"Aufgabe {value} erledigt!";
 
 

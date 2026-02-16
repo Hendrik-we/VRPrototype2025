@@ -8,17 +8,18 @@ public class ChapterManager : MonoBehaviour
     public TaskManager taskManager1;
     public TaskManager2 taskManager2;
     public TaskManager3 taskManager3;
+    public TimerManager timerManager;
 
     void Start()
     {
-        tutorialManager.StartChapter();
+        settingsManager.StartChapter();
     }
 
     public void CheckSettings()
     {
-        StartSettings();
+        StartTutorial();
     }
-    private void StartSettings()
+    private void StartTutorial()
     {
         tutorialManager.StartChapter();
     }
@@ -30,6 +31,7 @@ public class ChapterManager : MonoBehaviour
 
     private void StartChapter1()
     {
+        timerManager.StartTimer();
         taskManager1.StartChapter();
     }
     public void CheckChapter1()
@@ -54,7 +56,8 @@ public class ChapterManager : MonoBehaviour
 
     public void CheckChapter3()
     {
-        return;
+        timerManager.StopTimer();
+
     }
 
 }

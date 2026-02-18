@@ -5120,6 +5120,12 @@ MonoBehaviour:
   taskManager2: {fileID: 1476613452}
   taskManager3: {fileID: 368338914}
   timerManager: {fileID: 0}
+  scoreboardManager: {fileID: 0}
+  labelTimer: 0
+  labelProgressbar: 0
+  labelClue: 0
+  labelPresentation: 0
+  progressbar: {fileID: 1829104356}
 --- !u!1001 &229979912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5542,7 +5548,7 @@ RectTransform:
   m_Father: {fileID: 1805884328}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38407,7 +38413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1829104356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41979,7 +41985,7 @@ RectTransform:
   m_Father: {fileID: 959584554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

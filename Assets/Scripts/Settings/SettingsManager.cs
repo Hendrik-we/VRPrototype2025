@@ -65,10 +65,36 @@ public class SettingsManager : MonoBehaviour
 
     public void ApplySettings()
     {
+        labelClue = settingClue.GetCurrentOption();
         labelPresentation = settingPresentation.GetCurrentOption();
         labelProgressbar = settingProgressbar.GetCurrentOption();
-        labelClue = settingClue.GetCurrentOption();
         labelTimer = settingTimer.GetCurrentOption();
+
+        chapterManager.labelTimer = labelTimer switch
+        {
+            "An" => 0,
+            _ => 1
+        };
+
+        chapterManager.labelProgressbar = labelProgressbar switch
+        {
+            "An" => 0,
+            _ => 1
+        };
+
+        chapterManager.labelClue = labelClue switch
+        {
+            "Dezent" => 0,
+            "Auffällig" => 1,
+            _ => 2
+        };
+
+        chapterManager.labelPresentation = labelPresentation switch
+        {
+            "Professor" => 1,
+            _ => 0
+        };
+
     }
 
     //Task1

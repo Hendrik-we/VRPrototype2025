@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChapterManager : MonoBehaviour
 {
@@ -9,6 +10,16 @@ public class ChapterManager : MonoBehaviour
     public TaskManager2 taskManager2;
     public TaskManager3 taskManager3;
     public TimerManager timerManager;
+    public ScoreboardManager scoreboardManager;
+
+    public int labelTimer;
+    public int labelProgressbar;
+    public int labelClue;
+    public int labelPresentation;
+
+    public Slider progressbar;
+
+    private string playerName = "Henny";
 
     void Start()
     {
@@ -17,8 +28,31 @@ public class ChapterManager : MonoBehaviour
 
     public void CheckSettings()
     {
+        ApplyProgressbarSettings();
+        ApplyTimerSettings();
         StartTutorial();
     }
+
+    private void ApplyProgressbarSettings()
+    {
+        if (labelProgressbar == 1)
+        {
+            progressbar.gameObject.SetActive(false);
+        }
+        else
+        {
+            progressbar.gameObject.SetActive(true);
+        }
+    }
+
+    private void ApplyTimerSettings()
+    {
+        if (labelTimer == 0)
+        {
+            timerManager.StartTimer();
+        }
+    }
+
     private void StartTutorial()
     {
         tutorialManager.StartChapter();
@@ -31,7 +65,6 @@ public class ChapterManager : MonoBehaviour
 
     private void StartChapter1()
     {
-        timerManager.StartTimer();
         taskManager1.StartChapter();
     }
     public void CheckChapter1()
@@ -56,7 +89,12 @@ public class ChapterManager : MonoBehaviour
 
     public void CheckChapter3()
     {
-        timerManager.StopTimer();
+        if (labelTimer == 0)
+        {
+            timerManager.StopTimer();
+            float finalTime = timerManager.GetFinalTime();
+            scoreboardManager.AddEntry(playerName, finalTime);
+        }
 
     }
 

@@ -11,10 +11,19 @@ using UnityEngine.UI;
 public class TutorialManager : MonoBehaviour
 {
     public TextMeshProUGUI taskText;
+    public TextMeshPro profText;
     public ChapterManager chapterManager;
     public TeleportManager teleportManager;
     public Transform startPoint;
     public Slider progressBar;
+    public HighlightManager highlightManager;
+    public int highlightLabel;
+
+    public HighlightableObject gloves;
+    public HighlightableObject erlenmeyer;
+    public HighlightableObject florenz;
+    public HighlightableObject analysis;
+    public HighlightableObject button;
 
     private int activeTask = 0;
     private int completedTasks = 0;
@@ -37,14 +46,21 @@ public class TutorialManager : MonoBehaviour
         teleportManager.TeleportTo(startPoint);
         chapterActive = true; 
         taskText.text = "Laborschulung - Tutorial: Einführung in die Laborausrüstung";
+        profText.text = "Laborschulung - Tutorial: Einführung in die Laborausrüstung";
         StartCoroutine(StartTask(1));
         progressBar.value = 0;
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.Highlight(gloves);
+        }
+
     }
 
     private IEnumerator StartTask(int value)
     {
         yield return new WaitForSeconds(5f);
         taskText.text = tasks[value];
+        profText.text = tasks[value];
         activeTask = value;
         
         if (value == tasks.Count)
@@ -62,42 +78,72 @@ public class TutorialManager : MonoBehaviour
             completedTasks = completedTasks + 1;
             progressBar.value = (float)completedTasks / tasks.Count;
             taskText.text = $"Aufgabe {value} erledigt!";
+            profText.text = $"Aufgabe {value} erledigt!";
             StartCoroutine(StartTask(value + 1));
         }
     }
 
     public void SetGlovesOn()
     {
-        CheckTask(1);
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(gloves);
+            HighlightManager.Instance.Highlight(erlenmeyer);
+        }
+        CheckTask(1); 
+
     }
 
     public void ErlenmeyerPlaced()
     {
-        CheckTask(2); 
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(erlenmeyer);
+            HighlightManager.Instance.Highlight(florenz);
+        }
+        CheckTask(2);
+
     }
 
     public void ErlenmeyerFilled()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(florenz);
+            HighlightManager.Instance.Highlight(analysis);
+        }
         CheckTask(3);
     }
 
     public void ErlenmeyerAnalyzed()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(analysis);
+            HighlightManager.Instance.Highlight(gloves);
+        }
         CheckTask(4);
+
     }
 
     public void SetGlovesOff()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(gloves);
+            HighlightManager.Instance.Highlight(button);
+        }
         CheckTask(5);
     }
 
     public void FinishTutorial()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(button);
+        }
         CheckTask(6);
     }
-
-
-
 
 
 }

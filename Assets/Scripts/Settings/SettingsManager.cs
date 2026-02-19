@@ -12,6 +12,8 @@ public class SettingsManager : MonoBehaviour
     public SettingCategory settingProgressbar;
     public SettingCategory settingTimer;
     public SettingCategory settingClue;
+    public TeleportManager teleportManager;
+    public Transform startPoint;
 
     public string labelPresentation;
     public string labelProgressbar;
@@ -101,6 +103,12 @@ public class SettingsManager : MonoBehaviour
     public void SetSettingsDone()
     {
         CheckTask(1);
+    }
+
+    public void ReturnToSettings()
+    {
+        teleportManager.TeleportTo(startPoint);
+        taskText.text = "Herzlichen Glückwunsch! Du hast das Setting erfolgreich bestanden.";
     }
 
 

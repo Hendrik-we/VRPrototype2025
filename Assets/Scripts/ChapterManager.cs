@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ChapterManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class ChapterManager : MonoBehaviour
     public TaskManager3 taskManager3;
     public TimerManager timerManager;
     public ScoreboardManager scoreboardManager;
+    public GameObject tutProfessor;
+    public GameObject professor;
+    public TextMeshProUGUI taskText;
+
 
     public int labelTimer;
     public int labelProgressbar;
@@ -30,7 +35,9 @@ public class ChapterManager : MonoBehaviour
     {
         ApplyProgressbarSettings();
         ApplyTimerSettings();
-        StartTutorial();
+        ApplyClueSettings();
+        ApplyPresentationSettings();
+        StartChapter1();
     }
 
     private void ApplyProgressbarSettings()
@@ -50,6 +57,30 @@ public class ChapterManager : MonoBehaviour
         if (labelTimer == 0)
         {
             timerManager.StartTimer();
+        }
+    }
+
+    private void ApplyClueSettings()
+    {
+        tutorialManager.highlightLabel = labelClue;
+        taskManager1.highlightLabel = labelClue;
+        taskManager2.highlightLabel = labelClue;
+        taskManager3.highlightLabel = labelClue;
+    }
+
+    private void ApplyPresentationSettings()
+    {
+        if (labelPresentation == 1)
+        {
+            professor.SetActive(true);
+            tutProfessor.SetActive(true);
+            taskText.gameObject.SetActive(false);
+        }
+        else if(labelPresentation == 0)
+        {
+            professor.SetActive(false);
+            tutProfessor.SetActive(false);
+            taskText.gameObject.SetActive(true);
         }
     }
 
@@ -95,7 +126,7 @@ public class ChapterManager : MonoBehaviour
             float finalTime = timerManager.GetFinalTime();
             scoreboardManager.AddEntry(playerName, finalTime);
         }
-
+        settingsManager.ReturnToSettings();
     }
 
 }

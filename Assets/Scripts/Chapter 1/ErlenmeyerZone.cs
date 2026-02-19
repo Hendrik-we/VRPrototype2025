@@ -3,7 +3,6 @@ using UnityEngine;
 public class ErlenmeyerZone : MonoBehaviour
 {
     public GameObject erlenmeyerCorrect1;
-    public GameObject erlenmeyerCorrect2;
     public TaskManager taskManager;
     private bool taskCompleted = false;
 
@@ -12,7 +11,7 @@ public class ErlenmeyerZone : MonoBehaviour
         if (taskCompleted)
             return;
 
-        if (other.gameObject == erlenmeyerCorrect1 || other.gameObject == erlenmeyerCorrect2)
+        if (other.gameObject == erlenmeyerCorrect1)
         {
             taskCompleted = true;
             taskManager.SetErlenmeyerInZone();

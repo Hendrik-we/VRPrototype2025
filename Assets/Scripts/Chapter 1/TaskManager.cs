@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.XR.ARFoundation;
 
 
 public class TaskManager : MonoBehaviour
@@ -12,6 +13,20 @@ public class TaskManager : MonoBehaviour
     public ChapterManager chapterManager;
     public TeleportManager teleportManager;
     public Transform startPoint;
+    public HighlightManager highlightManager;
+    public int highlightLabel;
+
+    public HighlightableObject button;
+    public HighlightableObject gloves;
+    public HighlightableObject glasses;
+    public HighlightableObject sponge;
+    public HighlightableObject puffer;
+    public HighlightableObject erlenmeyer;
+    public HighlightableObject loesung1;
+    public HighlightableObject loesung3;
+    public HighlightableObject analysis;
+
+
 
     private int completedTasks = 0;
     private int activeTask = 0;
@@ -37,6 +52,10 @@ public class TaskManager : MonoBehaviour
         taskText.text = "Laborschulung - Kapitel 1: Vorbereitung des Arbeitsplatzes";
         StartCoroutine(StartTask(1));
         progressBar.value = 0;
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.Highlight(button);
+        }
     }
 
     private IEnumerator StartTask(int value)
@@ -72,6 +91,12 @@ public class TaskManager : MonoBehaviour
     {
         if (value)
         {
+            if (highlightLabel == 1)
+            {
+                HighlightManager.Instance.StopHighlight(button);
+                HighlightManager.Instance.Highlight(gloves);
+                HighlightManager.Instance.Highlight(glasses);
+            }
             CheckTask(1);
         }
     }
@@ -82,6 +107,12 @@ public class TaskManager : MonoBehaviour
     {
         if (hasGlasses && hasGloves && !hasHelmet)
         {
+            if (highlightLabel == 1)
+            {
+                HighlightManager.Instance.StopHighlight(gloves);
+                HighlightManager.Instance.StopHighlight(glasses);
+                HighlightManager.Instance.Highlight(sponge);
+            }
             CheckTask(2);
         }
     }
@@ -91,6 +122,11 @@ public class TaskManager : MonoBehaviour
     {
         if (value)
         {
+            if (highlightLabel == 1)
+            {
+                HighlightManager.Instance.StopHighlight(sponge);
+                HighlightManager.Instance.Highlight(puffer);
+            }
             CheckTask(3);
         }
     }
@@ -98,18 +134,36 @@ public class TaskManager : MonoBehaviour
 //Task4
     public void SetBottle1InZone()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(puffer);
+            HighlightManager.Instance.Highlight(erlenmeyer);
+        }
         CheckTask(4);
     }
 
 //Task5
     public void SetErlenmeyerInZone()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(erlenmeyer);
+            HighlightManager.Instance.Highlight(loesung1);
+            HighlightManager.Instance.Highlight(loesung3);
+            HighlightManager.Instance.Highlight(analysis);
+        }
         CheckTask(5);
     }
 
 //Task6
     public void SetBottle2Analyzed()
     {
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(loesung1);
+            HighlightManager.Instance.StopHighlight(loesung3);
+            HighlightManager.Instance.StopHighlight(analysis);
+        }
         CheckTask(6);
     }
 

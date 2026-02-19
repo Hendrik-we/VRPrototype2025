@@ -10,6 +10,17 @@ public class TaskManager3 : MonoBehaviour
     public TextMeshProUGUI taskText;
     public Slider progressBar;
     public ChapterManager chapterManager;
+    public HighlightManager highlightManager;
+    public int highlightLabel;
+
+
+    public HighlightableObject puffer;
+    public HighlightableObject erlenmeyer;
+    public HighlightableObject loesung1;
+    public HighlightableObject gloves;
+    public HighlightableObject glasses;
+    public HighlightableObject button;
+
 
     private int completedTasks = 0;
     private int activeTask = 0;
@@ -18,10 +29,9 @@ public class TaskManager3 : MonoBehaviour
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
         {1, "Aufgabe 1: Spüle das Glas der Pufferlösung A, Lösung B und den Erlenmeyerkolben aus!"},
-        {2, "Aufgabe 2: Stell alle leeren Behälter zurück in das Regal!"},
-        {3, "Aufgabe 3: Leg Schutzbrille und Handschuhe ab!" },
-        {4, "Aufgabe 4: Schalte die Arbeitsflächenbeleuchtung aus!" },
-        {5, "Kapitel 3 abgeschlossen!" }
+        {2, "Aufgabe 2: Zieh jegliche Sicherheitsausrüstung aus!" },
+        {3, "Aufgabe 3: Schalte die Arbeitsflächenbeleuchtung aus!" },
+        {4, "Kapitel 3 abgeschlossen!" }
     };
 
     public void StartChapter()
@@ -30,6 +40,12 @@ public class TaskManager3 : MonoBehaviour
         taskText.text = "Laborschulung - Kapitel 3: Nachbereitung und Entsorgung";
         StartCoroutine(StartTask(1));
         progressBar.value = 0;
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.Highlight(puffer);
+            HighlightManager.Instance.Highlight(loesung1);
+            HighlightManager.Instance.Highlight(erlenmeyer);
+        }
     }
 
     private IEnumerator StartTask(int value)
@@ -48,7 +64,7 @@ public class TaskManager3 : MonoBehaviour
 
     private void CheckTask(int value)
     {
-        if (activeChapter || activeTask == value)
+        if (activeChapter && activeTask == value)
         {
             completedTasks = completedTasks + 1;
             progressBar.value = (float)completedTasks / tasks.Count;
@@ -62,24 +78,36 @@ public class TaskManager3 : MonoBehaviour
     public void SetGlassesClean()
     {
         CheckTask(1);
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(puffer);
+            HighlightManager.Instance.StopHighlight(loesung1);
+            HighlightManager.Instance.StopHighlight(erlenmeyer);
+            HighlightManager.Instance.Highlight(gloves);
+            HighlightManager.Instance.Highlight(glasses);
+        }
     }
 
     //Task2
-    public void SetGlassesPlaced()
+    public void SetClothesOff()
     {
         CheckTask(2);
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(gloves);
+            HighlightManager.Instance.StopHighlight(glasses);
+            HighlightManager.Instance.Highlight(button);
+        }
     }
 
     //Task3
-    public void SetClothesOff()
-    {
-        CheckTask(3);
-    }
-
-    //Task4
     public void SetLightsOff()
     {
-        CheckTask(4);
+        if (highlightLabel == 1)
+        {
+            HighlightManager.Instance.StopHighlight(button);
+        }
+        CheckTask(3);
     }
 
 

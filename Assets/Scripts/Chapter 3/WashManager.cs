@@ -10,12 +10,15 @@ public class WashManager : MonoBehaviour
     private bool washedPuffer = false;
     private bool washedLoesung = false;
 
+    public bool allownextTask = false;
+
 
     private void OnTriggerEnter(Collider other)
     {
         var glass = other.GetComponent<WashableGlass>();
         if (glass != null)
         {
+            Debug.Log("WashableGlass erkannt: " + glass.glassType);
             Wash(glass);
         }
     }
@@ -54,7 +57,13 @@ public class WashManager : MonoBehaviour
     {
         if(washedErlenmeyer && washedPuffer && washedLoesung)
         {
+            allownextTask = true;
             taskManager.SetGlassesClean();
         }
+    }
+
+    public void ResetTask()
+    {
+        allownextTask = false;
     }
 }

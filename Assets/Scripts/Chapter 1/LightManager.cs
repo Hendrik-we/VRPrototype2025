@@ -5,7 +5,10 @@ public class LightManager : MonoBehaviour
 {
     public Light[] lightsToToggle;
     public TaskManager taskManager;
+    public TaskManager3 taskManager3;
+    public WardrobeManager wardrobeManager;
     private bool isOn = false;
+    
 
     public void ButtonPressed()
     {
@@ -19,6 +22,11 @@ public class LightManager : MonoBehaviour
         if (isOn)
         {
             taskManager.SetLightsOn(true);
+        }
+
+        if (!isOn && wardrobeManager.allowLightTask)
+        {
+            taskManager3.SetLightsOff();
         }
     }
 

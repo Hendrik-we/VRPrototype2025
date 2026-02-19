@@ -37,7 +37,7 @@ public class ChapterManager : MonoBehaviour
         ApplyTimerSettings();
         ApplyClueSettings();
         ApplyPresentationSettings();
-        StartChapter1();
+        StartTutorial();
     }
 
     private void ApplyProgressbarSettings()

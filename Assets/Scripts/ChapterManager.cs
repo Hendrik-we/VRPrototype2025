@@ -34,7 +34,6 @@ public class ChapterManager : MonoBehaviour
     public void CheckSettings()
     {
         ApplyProgressbarSettings();
-        ApplyTimerSettings();
         ApplyClueSettings();
         ApplyPresentationSettings();
         StartTutorial();
@@ -96,6 +95,7 @@ public class ChapterManager : MonoBehaviour
 
     private void StartChapter1()
     {
+        ApplyTimerSettings();
         taskManager1.StartChapter();
     }
     public void CheckChapter1()

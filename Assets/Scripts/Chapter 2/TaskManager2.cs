@@ -8,9 +8,11 @@ using System.Collections.Generic;
 public class TaskManager2 : MonoBehaviour
 {
     public TextMeshProUGUI taskText;
+    public TextMeshPro profText;
     public Slider progressBar;
     public ChapterManager chapterManager;
     public HighlightManager highlightManager;
+    public LowHighlightManager lowHighlightManager;
     public int highlightLabel;
 
     public HighlightableObject puffer;
@@ -22,6 +24,16 @@ public class TaskManager2 : MonoBehaviour
     public HighlightableObject kuehlwall;
     public HighlightableObject reagenz;
     public HighlightableObject halterung;
+
+    public LowHighlightableObject puffer_low;
+    public LowHighlightableObject erlenmeyer_low;
+    public LowHighlightableObject loesung1_low;
+    public LowHighlightableObject ofen_low;
+    public LowHighlightableObject analysis_low;
+    public LowHighlightableObject kuehl_low;
+    public LowHighlightableObject kuehlwall_low;
+    public LowHighlightableObject reagenz_low;
+    public LowHighlightableObject halterung_low;
     
 
     private int completedTasks = 0;
@@ -30,13 +42,13 @@ public class TaskManager2 : MonoBehaviour
 
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
-        {1, "Aufgabe 1: Fülle die Pufferlösung A und Lösung B - 10% in den Erlenmeyerkolben!"},
-        {2, "Aufgabe 2: Erhitze die Säure X auf der Heizfläche, bis diese 40°C hat!"},
-        {3, "Aufgabe 3: Nutze die Analysemaschine, um zu prüfen, ob die Säure X 5% hat!"},
-        {4, "Aufgabe 4: Stell die Säure X - 5% in den Kühlraum!"},
-        {5, "Aufgabe 5: Stell ein Reagenzglas in die dafür vorgesehene Halterung auf der Arbeitsfläche!" },
-        {6, "Aufgabe 6: Gib Säure X - gekühlt in das Reagenzglas!" },
-        {7, "Aufgabe 7: Warte ab bis aus der Säure X - gekühlt die Reaktionslösung wird." },
+        {1, "Aufgabe 1: FÃ¼lle die PufferlÃ¶sung A und LÃ¶sung B - 10% in den Erlenmeyerkolben!"},
+        {2, "Aufgabe 2: Erhitze die SÃ¤ure X auf der HeizflÃ¤che, bis diese 40Â°C hat!"},
+        {3, "Aufgabe 3: Nutze die Analysemaschine, um zu prÃ¼fen, ob die SÃ¤ure X 5% hat!"},
+        {4, "Aufgabe 4: Stell die SÃ¤ure X - 5% in den KÃ¼hlraum!"},
+        {5, "Aufgabe 5: Stell ein Reagenzglas in die dafÃ¼r vorgesehene Halterung auf der ArbeitsflÃ¤che!" },
+        {6, "Aufgabe 6: Gib SÃ¤ure X - gekÃ¼hlt in das Reagenzglas!" },
+        {7, "Aufgabe 7: Warte ab bis aus der SÃ¤ure X - gekÃ¼hlt die ReaktionslÃ¶sung wird." },
         {8, "Kapitel 2 abgeschlossen!" }
     };
 
@@ -44,7 +56,8 @@ public class TaskManager2 : MonoBehaviour
     public void StartChapter()
     {
         activeChapter = true;
-        taskText.text = "Laborschulung - Kapitel 2: Herrstellung der Reaktionslösung";
+        taskText.text = "Laborschulung - Kapitel 2: Herstellung der ReaktionslÃ¶sung";
+        profText.text = "Laborschulung - Kapitel 2: Herstellung der ReaktionslÃ¶sung";
         StartCoroutine(StartTask(1));
         progressBar.value = 0;
         if (highlightLabel == 1)
@@ -52,12 +65,18 @@ public class TaskManager2 : MonoBehaviour
             HighlightManager.Instance.Highlight(puffer);
             HighlightManager.Instance.Highlight(loesung1);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.Highlight(puffer_low);
+            LowHighlightManager.Instance.Highlight(loesung1_low);
+        }
     }
 
     private IEnumerator StartTask(int value)
     {
         yield return new WaitForSeconds(5f);
         taskText.text = tasks[value];
+        profText.text = tasks[value];
         activeTask = value;
 
         if (value == tasks.Count)
@@ -76,6 +95,7 @@ public class TaskManager2 : MonoBehaviour
             completedTasks = completedTasks + 1;
             progressBar.value = (float)completedTasks / tasks.Count;
             taskText.text = $"Aufgabe {value} erledigt!";
+            profText.text = $"Aufgabe {value} erledigt!";
 
             StartCoroutine(StartTask(value + 1));
         }
@@ -91,6 +111,12 @@ public class TaskManager2 : MonoBehaviour
             HighlightManager.Instance.StopHighlight(loesung1);
             HighlightManager.Instance.Highlight(ofen);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(puffer_low);
+            LowHighlightManager.Instance.StopHighlight(loesung1_low);
+            LowHighlightManager.Instance.Highlight(ofen_low);
+        }
     }
 
     //Task2
@@ -101,6 +127,11 @@ public class TaskManager2 : MonoBehaviour
         {
             HighlightManager.Instance.StopHighlight(ofen);
             HighlightManager.Instance.Highlight(analysis);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(ofen_low);
+            LowHighlightManager.Instance.Highlight(analysis_low);
         }
     }
 
@@ -113,6 +144,12 @@ public class TaskManager2 : MonoBehaviour
             HighlightManager.Instance.StopHighlight(analysis);
             HighlightManager.Instance.Highlight(kuehl);
             HighlightManager.Instance.Highlight(kuehlwall);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(analysis_low);
+            LowHighlightManager.Instance.Highlight(kuehl_low);
+            LowHighlightManager.Instance.Highlight(kuehlwall_low);
         }
     }
 
@@ -127,6 +164,13 @@ public class TaskManager2 : MonoBehaviour
             HighlightManager.Instance.Highlight(reagenz);
             HighlightManager.Instance.Highlight(halterung);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(kuehl_low);
+            LowHighlightManager.Instance.StopHighlight(kuehlwall_low);
+            LowHighlightManager.Instance.Highlight(reagenz_low);
+            LowHighlightManager.Instance.Highlight(halterung_low);
+        }
     }
 
     //Task5
@@ -138,6 +182,11 @@ public class TaskManager2 : MonoBehaviour
             HighlightManager.Instance.StopHighlight(halterung);
             HighlightManager.Instance.Highlight(erlenmeyer);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(halterung_low);
+            LowHighlightManager.Instance.Highlight(erlenmeyer_low);
+        }
     }
 
     //Task6
@@ -148,6 +197,11 @@ public class TaskManager2 : MonoBehaviour
         {
             HighlightManager.Instance.StopHighlight(reagenz);
             HighlightManager.Instance.StopHighlight(erlenmeyer);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(reagenz_low);
+            LowHighlightManager.Instance.StopHighlight(erlenmeyer_low);
         }
     }
 

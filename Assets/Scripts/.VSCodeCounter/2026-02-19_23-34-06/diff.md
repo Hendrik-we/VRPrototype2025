@@ -1,0 +1,21 @@
+# Diff Summary
+
+Date : 2026-02-19 23:34:06
+
+Directory c:\\Users\\Hendrik Wetzel\\Create with VR\\VR-Prototype 2\\VR Room Project\\Assets\\Scripts
+
+Total : 1 files,  4034 codes, 0 comments, 651 blanks, all 4685 lines
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)
+
+## Languages
+| language | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| C# | 1 | 4,034 | 0 | 651 | 4,685 |
+
+## Directories
+| path | files | code | comment | blank | total |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| . | 1 | 4,034 | 0 | 651 | 4,685 |
+
+[Summary](results.md) / [Details](details.md) / Diff Summary / [Diff Details](diff-details.md)

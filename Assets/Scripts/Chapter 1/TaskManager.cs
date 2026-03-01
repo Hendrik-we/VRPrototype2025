@@ -9,11 +9,13 @@ using UnityEngine.XR.ARFoundation;
 public class TaskManager : MonoBehaviour
 {
     public TextMeshProUGUI taskText;
+    public TextMeshPro profText;
     public Slider progressBar;
     public ChapterManager chapterManager;
     public TeleportManager teleportManager;
     public Transform startPoint;
     public HighlightManager highlightManager;
+    public LowHighlightManager lowHighlightManager;
     public int highlightLabel;
 
     public HighlightableObject button;
@@ -26,6 +28,16 @@ public class TaskManager : MonoBehaviour
     public HighlightableObject loesung3;
     public HighlightableObject analysis;
 
+    public LowHighlightableObject button_low;
+    public LowHighlightableObject gloves_low;
+    public LowHighlightableObject glasses_low;
+    public LowHighlightableObject sponge_low;
+    public LowHighlightableObject puffer_low;
+    public LowHighlightableObject erlenmeyer_low;
+    public LowHighlightableObject loesung1_low;
+    public LowHighlightableObject loesung3_low;
+    public LowHighlightableObject analysis_low;
+
 
 
     private int completedTasks = 0;
@@ -35,12 +47,12 @@ public class TaskManager : MonoBehaviour
     Dictionary<int, string> tasks = new Dictionary<int, string>()
     {
         {1, "Aufgabe 1: Schalte das Licht an!"},
-        {2, "Aufgabe 2: Zieh ausschlieﬂlich die Handschuhe und 'Schutzbrille' an!"},
-        {3, "Aufgabe 3: Reinige die Arbeitsfl‰che!"},
-        {4, "Aufgabe 4: Stell die Pufferlˆsung A auf die Arbeitsfl‰che!"},
-        {5, "Aufgabe 5: Stell den Erlenmeyerkolben auf die Arbeitsfl‰che!"},
-        {6, "Aufgabe 6: Du benˆtigst ein Lˆsung B - 10%! Finde mithilfe des Analyseger‰ts heraus, welche du nutzen kannst!" },
-        {7, "Aufgabe 7: Stell die Lˆsung B - 10% auf die Arbeitsfl‰che!" },
+        {2, "Aufgabe 2: Zieh ausschlie√ülich die Handschuhe und 'Schutzbrille' an!"},
+        {3, "Aufgabe 3: Reinige die Arbeitsfl√§che!"},
+        {4, "Aufgabe 4: Stell die Pufferl√∂sung A auf die Arbeitsfl√§che!"},
+        {5, "Aufgabe 5: Stell den Erlenmeyerkolben auf die Arbeitsfl√§che!"},
+        {6, "Aufgabe 6: Du ben√∂tigst ein L√∂sung B - 10%! Finde mithilfe des Analyseger√§ts heraus, welche du nutzen kannst!" },
+        {7, "Aufgabe 7: Stell die L√∂sung B - 10% auf die Arbeitsfl√§che!" },
         {8, "Kapitel 1 abgeschlossen!"}
     };
 
@@ -50,11 +62,16 @@ public class TaskManager : MonoBehaviour
         teleportManager.TeleportTo(startPoint);
         activeChapter = true;
         taskText.text = "Laborschulung - Kapitel 1: Vorbereitung des Arbeitsplatzes";
+        profText.text = "Laborschulung - Kapitel 1: Vorbereitung des Arbeitsplatzes";
         StartCoroutine(StartTask(1));
         progressBar.value = 0;
         if (highlightLabel == 1)
         {
             HighlightManager.Instance.Highlight(button);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.Highlight(button_low);
         }
     }
 
@@ -62,6 +79,7 @@ public class TaskManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         taskText.text = tasks[value];
+        profText.text = tasks[value];
         activeTask = value;
         
         if (value == tasks.Count)
@@ -80,6 +98,7 @@ public class TaskManager : MonoBehaviour
             completedTasks = completedTasks + 1;
             progressBar.value = (float)completedTasks / tasks.Count;
             taskText.text = $"Aufgabe {value} erledigt!";
+            profText.text = $"Aufgabe {value} erledigt!";
 
 
             StartCoroutine(StartTask(value + 1));
@@ -97,6 +116,12 @@ public class TaskManager : MonoBehaviour
                 HighlightManager.Instance.Highlight(gloves);
                 HighlightManager.Instance.Highlight(glasses);
             }
+            else if (highlightLabel == 0)
+            {
+                LowHighlightManager.Instance.StopHighlight(button_low);
+                LowHighlightManager.Instance.Highlight(gloves_low);
+                LowHighlightManager.Instance.Highlight(glasses_low);
+            }
             CheckTask(1);
         }
     }
@@ -113,6 +138,12 @@ public class TaskManager : MonoBehaviour
                 HighlightManager.Instance.StopHighlight(glasses);
                 HighlightManager.Instance.Highlight(sponge);
             }
+            else if (highlightLabel == 0)
+            {
+                LowHighlightManager.Instance.StopHighlight(gloves_low);
+                LowHighlightManager.Instance.StopHighlight(glasses_low);
+                LowHighlightManager.Instance.Highlight(sponge_low);
+            }
             CheckTask(2);
         }
     }
@@ -127,6 +158,11 @@ public class TaskManager : MonoBehaviour
                 HighlightManager.Instance.StopHighlight(sponge);
                 HighlightManager.Instance.Highlight(puffer);
             }
+            else if (highlightLabel == 0)
+            {
+                LowHighlightManager.Instance.StopHighlight(sponge_low);
+                LowHighlightManager.Instance.Highlight(puffer_low);
+            }
             CheckTask(3);
         }
     }
@@ -138,6 +174,11 @@ public class TaskManager : MonoBehaviour
         {
             HighlightManager.Instance.StopHighlight(puffer);
             HighlightManager.Instance.Highlight(erlenmeyer);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(puffer_low);
+            LowHighlightManager.Instance.Highlight(erlenmeyer_low);
         }
         CheckTask(4);
     }
@@ -152,6 +193,13 @@ public class TaskManager : MonoBehaviour
             HighlightManager.Instance.Highlight(loesung3);
             HighlightManager.Instance.Highlight(analysis);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(erlenmeyer_low);
+            LowHighlightManager.Instance.Highlight(loesung1_low);
+            LowHighlightManager.Instance.Highlight(loesung3_low);
+            LowHighlightManager.Instance.Highlight(analysis_low);
+        }
         CheckTask(5);
     }
 
@@ -163,6 +211,12 @@ public class TaskManager : MonoBehaviour
             HighlightManager.Instance.StopHighlight(loesung1);
             HighlightManager.Instance.StopHighlight(loesung3);
             HighlightManager.Instance.StopHighlight(analysis);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(loesung1_low);
+            LowHighlightManager.Instance.StopHighlight(loesung3_low);
+            LowHighlightManager.Instance.StopHighlight(analysis_low);
         }
         CheckTask(6);
     }

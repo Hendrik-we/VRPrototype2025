@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     public Transform startPoint;
     public Slider progressBar;
     public HighlightManager highlightManager;
+    public LowHighlightManager lowHighlightManager;
     public int highlightLabel;
 
     public HighlightableObject gloves;
@@ -24,6 +25,12 @@ public class TutorialManager : MonoBehaviour
     public HighlightableObject florenz;
     public HighlightableObject analysis;
     public HighlightableObject button;
+
+    public LowHighlightableObject gloves_low;
+    public LowHighlightableObject erlenmeyer_low;
+    public LowHighlightableObject florenz_low;
+    public LowHighlightableObject analysis_low;
+    public LowHighlightableObject button_low;
 
     private int activeTask = 0;
     private int completedTasks = 0;
@@ -52,6 +59,10 @@ public class TutorialManager : MonoBehaviour
         if (highlightLabel == 1)
         {
             HighlightManager.Instance.Highlight(gloves);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.Highlight(gloves_low);
         }
 
     }
@@ -90,6 +101,11 @@ public class TutorialManager : MonoBehaviour
             HighlightManager.Instance.StopHighlight(gloves);
             HighlightManager.Instance.Highlight(erlenmeyer);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(gloves_low);
+            LowHighlightManager.Instance.Highlight(erlenmeyer_low);
+        }
         CheckTask(1); 
 
     }
@@ -100,6 +116,11 @@ public class TutorialManager : MonoBehaviour
         {
             HighlightManager.Instance.StopHighlight(erlenmeyer);
             HighlightManager.Instance.Highlight(florenz);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(erlenmeyer_low);
+            LowHighlightManager.Instance.Highlight(florenz_low);
         }
         CheckTask(2);
 
@@ -112,6 +133,11 @@ public class TutorialManager : MonoBehaviour
             HighlightManager.Instance.StopHighlight(florenz);
             HighlightManager.Instance.Highlight(analysis);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(florenz_low);
+            LowHighlightManager.Instance.Highlight(analysis_low);
+        }
         CheckTask(3);
     }
 
@@ -121,6 +147,11 @@ public class TutorialManager : MonoBehaviour
         {
             HighlightManager.Instance.StopHighlight(analysis);
             HighlightManager.Instance.Highlight(gloves);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(analysis_low);
+            LowHighlightManager.Instance.Highlight(gloves_low);
         }
         CheckTask(4);
 
@@ -133,6 +164,11 @@ public class TutorialManager : MonoBehaviour
             HighlightManager.Instance.StopHighlight(gloves);
             HighlightManager.Instance.Highlight(button);
         }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(gloves_low);
+            LowHighlightManager.Instance.Highlight(button_low);
+        }
         CheckTask(5);
     }
 
@@ -141,6 +177,10 @@ public class TutorialManager : MonoBehaviour
         if (highlightLabel == 1)
         {
             HighlightManager.Instance.StopHighlight(button);
+        }
+        else if (highlightLabel == 0)
+        {
+            LowHighlightManager.Instance.StopHighlight(button_low);
         }
         CheckTask(6);
     }
